@@ -7,7 +7,7 @@ title: Mind Abyss
 subtitle: Which Thought Beyonds Any
 description:
 author: L.C. Xu
-language: Chinese
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: alpha-dust
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
