@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="L.C. Xu">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Mind Abyss"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Mind Abyss"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Mind Abyss</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-eye" aria-hidden="true"></i></a>
+        
+            <h1 id="main-title" class="title">Mind Abyss</h1>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2017/06/12/简单的树构建操作/">
+                简单的树构建操作
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-06-12</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>日常开发中常会遇到有相互隶属关系的同种数据，例如用户权限，网站地图，文档目录，以及一些动态的分类方式等，甚至是pypi上的项目引用关系。此时相信大家都明白，应该使用的数据结构是树。</p>
+<p>大家都知道使用树，那如何用得好，不至于走岔迷失呢？在我看来，重点一是在于<strong>方便寻址</strong>，根据业务需要，在创建树的同时创建好一个或多个适用的索引表；二是将树<strong>可视化、形象化</strong>，通过添加节点特征，规范变量名，或者建立可靠的序列化输出机制，从而便于程序判断和debug。 这两点非常有助于程序猿快速建立对这个树的直观映像，并提升代码的表达能力。</p>
+<p>相信我，一个好的程序猿应该拥有的素质，不是在复杂的数据结构中绕来绕去而不晕的能力，而是将一个看似复杂的数据结构快速梳理出线索，使其简单可靠的能力。而运用好之前提到的两点，就如同在几何题中做出了关键辅助线。</p>
+<h2 id="实践一"><a href="#实践一" class="headerlink" title="实践一"></a>实践一</h2><p>产品中有帮助系统，帮助文档的目录是一个简单的三层结构：产品，子目录，页面。</p>
+<p>早年的目录结构是页面存在数据库中，子目录和产品的关系以字典结构直接写在代码中。后来又重构成了目录结构都以节点方式放在数据库，在代码中创建为树。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 数据样例 */</span></div><div class="line">&#123;<span class="attr">id</span>: <span class="number">0</span>, <span class="attr">name</span>: <span class="string">'some help menu'</span>&#125;</div><div class="line">&#123;<span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">'yet a menu'</span>, <span class="attr">root</span>: <span class="number">0</span>&#125;</div><div class="line">&#123;<span class="attr">id</span>: <span class="number">2</span>, <span class="attr">name</span>: <span class="string">'menu x'</span>, <span class="attr">root</span>: <span class="number">1</span>&#125;</div><div class="line">&#123;<span class="attr">id</span>: <span class="number">3</span>, <span class="attr">name</span>: <span class="string">'another'</span>, <span class="attr">root</span>: <span class="number">0</span>&#125;</div><div class="line">&#123;<span class="attr">id</span>: <span class="number">4</span>, <span class="attr">name</span>: <span class="string">'some other product'</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>但是这里有个问题，这段代码中每当需要使用到某一确定id的帮助文档时，总是在树中进行深度优先查找，嵌套多层循环。反向查找其父级内容创建面包屑时，又是在节点列表中不断循环查找其id和当前节点父级id相同的节点，直到父级id属性为空。这种自找麻烦的情况在展示搜索帮助文档内容时达到峰值，页面需要一个新的缩小的树状结构用于展示搜索结果的分布情况并计数，代码中进行的判断和循环多达6次缩进。请注意，在学校教过树的搜索是深度优先和广度优先。但是，我们使用时千万不要轻易在树中搜索。我们需要的是捷径。</p>
+<p>我们来看看我们对此数据结构的需求是什么样的：</p>
+<ul>
+<li>页面上有个树形的帮助文档索引需要展示</li>
+<li>帮助目录只会有3层，短期内不会有其他更改</li>
+<li>当显示某个确定的帮助文档时，需要展示面包屑导航栏</li>
+<li>对帮助进行搜索，展示时树中仅显示被命中的项目，并对每个分类被搜索到的项目计数</li>
+</ul>
+<p>为了能实现这个简单的需求，我们需要一个有索引的树。</p>
+<p>首先，我们定义一个类，这个类的功能很简单，就是生成目录树，实例化完毕后，其<code>tree</code>属性就是一个描述树图的大字典，<code>id_index</code>属性则是一个id索引，另外，还在数据内部添加了一点标记。如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">self.tree = &#123;</div><div class="line">    <span class="string">'id_0'</span>: &#123;</div><div class="line">        ...   <span class="comment"># root content</span></div><div class="line">        menu_level: <span class="number">0</span>,</div><div class="line">        children: &#123;</div><div class="line">            <span class="string">'menu_id'</span>: &#123; ..., children: &#123;...&#125;&#125;</div><div class="line">            <span class="string">'menu_id'</span>: &#123; ..., children: &#123;...&#125;&#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">self.id_index = &#123;</div><div class="line">    <span class="string">'id_0'</span>: root_data,  <span class="comment"># 即self.tree中root_</span></div><div class="line">    <span class="string">'id_1'</span>: data_1,  <span class="comment"># 即self.tree中children下的dict对象</span></div><div class="line">    <span class="string">'id_2'</span>: data_2,</div><div class="line">    <span class="string">'id_3'</span>: data_3,</div><div class="line">    ...,</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>这里用到了python中对可变对象的名字引用，这样的数据结构有个好处，就是可以根据id快速定位到某个帮助页面，同时根据获得的这个字典对象在树形图中快速寻找其下级目录，或者根据其root属性再次在index中定位其父级页面。</p>
+<p>生成代码大致如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 生成一个简单的树</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelpMenuTree</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, node_list)</span>:</span></div><div class="line">        self.tree = &#123;&#125;</div><div class="line">        self.id_index = &#123;&#125;</div><div class="line">        self.__build(node_list)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__build</span><span class="params">(self, node_list)</span>:</span></div><div class="line">        menu_level = <span class="number">0</span></div><div class="line">        origin_len = len(node_list)</div><div class="line">        <span class="keyword">while</span> len(node_list):</div><div class="line">            tmp_id_index = &#123;&#125;</div><div class="line">            <span class="keyword">for</span> node <span class="keyword">in</span> node_list[:]:</div><div class="line">                parent = <span class="keyword">None</span></div><div class="line">                <span class="keyword">if</span> <span class="keyword">not</span> node.get(<span class="string">'root'</span>):    <span class="comment"># 首次循环检查root节点</span></div><div class="line">                    parent = self.tree</div><div class="line">                <span class="keyword">elif</span> node[<span class="string">'root'</span>] <span class="keyword">in</span> self.id_index:  <span class="comment"># 之后每次获取一层的节点</span></div><div class="line">                    parent = self.id_index[node[<span class="string">'root'</span>]].setdefault(<span class="string">'children'</span>, &#123;&#125;)</div><div class="line">                <span class="keyword">if</span> parent:</div><div class="line">                    parent[node[<span class="string">'id'</span>]] = tmp_id_index[node[<span class="string">'id'</span>]] = node</div><div class="line">                    node[<span class="string">'menu_level'</span>] = menu_level</div><div class="line">                    node_list.remove(node)</div><div class="line">            self.id_index.update(tmp_id_index)  <span class="comment"># 循环完毕一层的节点之后，更新到id_index</span></div><div class="line">            menu_level += <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> origin_len == len(node_list):</div><div class="line">                <span class="keyword">break</span>      <span class="comment"># 如果列表长度没变化，说明剩下的都是孤立节点，丢弃，或许可以打个日志</span></div><div class="line">            origin_len = len(node_list)</div></pre></td></tr></table></figure>
+<p>在这段代码为我们生成一个足够简单好用的树，我们可以为其添加一些方便的方法，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_bread</span><span class="params">(self, help_id)</span>:</span></div><div class="line">    <span class="string">""" 为help文档创建面包屑"""</span></div><div class="line">    <span class="keyword">if</span> help_id <span class="keyword">not</span> <span class="keyword">in</span> self.id_index:</div><div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'...'</span>)</div><div class="line">    bread_list = []</div><div class="line">    target_id = help_id</div><div class="line">    <span class="keyword">while</span> target_id:</div><div class="line">        target = self.id_index[target_id]</div><div class="line">        bread_list.append(target)</div><div class="line">        target_id = target.get(<span class="string">'root'</span>)</div></pre></td></tr></table></figure>
+<p>从这段代码我们可以显而易见的发现索引的好处。</p>
+
+        </div>
+    
+
+</div>
+            
+        </section>
+    </div>
+</div>
+
+
+
+
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>关于</h2>
+                <p>
+                    Wellcome to <a href="https://github.com/tvboxme">MY</a> blog.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>最新文章</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2017/06/12/简单的树构建操作/">简单的树构建操作</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/tvboxme/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Mind Abyss. All right reserved | Author: <a href="https://github.com/tvboxme/">Leo Xu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
