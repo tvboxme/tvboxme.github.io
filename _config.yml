@@ -68,4 +68,5 @@ theme: alpha-dust
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: git@github.com:tvboxme/tvboxme.github.io.git
