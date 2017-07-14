@@ -9,7 +9,7 @@ description:
 author: L.C. Xu
 language: zh-CN
 timezone: Asia/Shanghai
-favicon: /eye.png
+favicon: favicon.ico
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
