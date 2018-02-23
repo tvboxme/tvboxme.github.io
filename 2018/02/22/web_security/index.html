@@ -179,7 +179,7 @@
 <p>例如，制作一个转账请求的链接诱导用户点击，甚至隐藏在xss中只需要加载即可完成攻击<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">'POST'</span>, <span class="string">'http://某银行/某转账操作/'</span>);</div><div class="line">xhr.send(<span class="string">'账户=我的账户&amp;金额=好多好多钱'</span>);</div></pre></td></tr></table></figure></p>
 <p>若此用户正保存此银行网站cookie且银行网站无法防御CSRF攻击，则用户转账请求被伪造成功。</p>
 <h3 id="规避方法-2"><a href="#规避方法-2" class="headerlink" title="规避方法"></a>规避方法</h3><p>CSRF通常危害各种有副作用的请求操作，例如提交表单等，主要在POST领域，所以通常也是防御POST行为。<br>这要求我们的POST操作不能仅仅信任cookie，还需要一些瞬时验证，比如在展示表单的时候在其中隐藏一次性token，在提交时验证并消耗此token。Django对此有标准的CSRF中间件。</p>
-<h1 id="目录穿越"><a href="#目录穿越" class="headerlink" title="目录穿越"></a>目录穿越</h1><h3 id="漏洞简介-3"><a href="#漏洞简介-3" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>此漏洞很少出现在现代框架中，其工作方式是在浏览器中尝试输入带有’../‘的路径，去请求更上层的文件。例如尝试请求机器 <code>/etc</code> 目录下的某些关键配置等。</p>
+<h1 id="目录穿越"><a href="#目录穿越" class="headerlink" title="目录穿越"></a>目录穿越</h1><h3 id="漏洞简介-3"><a href="#漏洞简介-3" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>此漏洞很少出现在现代框架中，其工作方式是在浏览器中尝试输入带有<code>../</code>的路径，去请求更上层的文件。例如尝试请求机器 <code>/etc</code> 目录下的某些关键配置等。</p>
 <h3 id="规避方法-3"><a href="#规避方法-3" class="headerlink" title="规避方法"></a>规避方法</h3><p>除了在一些非常古老的php框架中外，此漏洞一般不会出现，但是也不要自己主动制造，比如不要在代码中尝试将用户输入直接拼接到文件打开路径中。</p>
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>一句话： Web开发中永远不要相信用户输入。</p>
 
