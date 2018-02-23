@@ -10,6 +10,9 @@
 
     <!--Description-->
     
+        <meta name="description" content="SQL injection漏洞简介SQL注入：在参数处填写特殊字符以修改数据库查询命令功能，从而窃取或修改数据库信息。不安全的数据库调用方式容易引起此漏洞。
+例如，利用字符串拼接书写SQL语句极易引起SQL注入。12# 一个十分初级的SQLi导致登录绕过的情况query_str = &quot;SELECT ">
+    
 
 
     <!--Author-->
@@ -19,7 +22,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Mind Abyss"/>
+        <meta property="og:title" content="Web开发中常见的安全问题"/>
     
 
     <!--Open Graph Description-->
@@ -30,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -41,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>Mind Abyss</title>
+    <title>Web开发中常见的安全问题 - Mind Abyss</title>
 
     <!--Favicon-->
     
@@ -129,17 +132,14 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-eye" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">Mind Abyss</h1>
-        
     </div>
 </header>
 
         <section class="main">
             
-                
 <div class="post">
 
-    <div class="post-header index">
+    <div class="post-header">
         <h1 class="title">
             <a href="/2018/02/22/web_security/">
                 Web开发中常见的安全问题
@@ -154,9 +154,13 @@
         </div>
     </div>
 
-    
-        <div class="content">
-            <h1 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="SQL injection"></a>SQL injection</h1><h3 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>SQL注入：在参数处填写特殊字符以修改数据库查询命令功能，从而窃取或修改数据库信息。不安全的数据库调用方式容易引起此漏洞。</p>
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h1 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="SQL injection"></a>SQL injection</h1><h3 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>SQL注入：在参数处填写特殊字符以修改数据库查询命令功能，从而窃取或修改数据库信息。不安全的数据库调用方式容易引起此漏洞。</p>
 <p>例如，利用字符串拼接书写SQL语句极易引起SQL注入。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 一个十分初级的SQLi导致登录绕过的情况</span></div><div class="line">query_str = <span class="string">"SELECT id FROM users WHERE name = '%s' and password = '%s'"</span> % (username, password)</div></pre></td></tr></table></figure></p>
 <p>当用户填写信息导致<code>username = &quot;&#39; or &#39;1&#39; = &#39;1&#39; /*&quot;</code>时，query_str 中实际的判断条件为：<code>name = &#39;&#39; or &#39;1&#39; = &#39;1&#39;</code>, 显然为真，导致登录绕过。</p>
 <p>SQLi 的危害不仅于此，发现此漏洞后可以通过添加分号后接各种语句达到遍历数据库甚至删库等操作。例如将前文中 <code>name</code> 填写为 `’;DROP TABLE user;`` 等。</p>
@@ -179,19 +183,25 @@
 <h3 id="规避方法-3"><a href="#规避方法-3" class="headerlink" title="规避方法"></a>规避方法</h3><p>除了在一些非常古老的php框架中外，此漏洞一般不会出现，但是也不要自己主动制造，比如不要在代码中尝试将用户输入直接拼接到文件打开路径中。</p>
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>一句话： Web开发中永远不要相信用户输入。</p>
 
+    </div>
+
+    
+
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/Web/">#Web</a> <a href="/tags/Security/">#Security</a>
         </div>
     
 
+    <!-- Comments -->
+    
+
 </div>
-            
         </section>
+
     </div>
 </div>
-
-
-
-
-
 
 </div>
 
