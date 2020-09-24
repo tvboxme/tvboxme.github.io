@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,24 +22,24 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Web开发中常见的安全问题"/>
+        <meta property="og:title" content="Web开发中常见的安全问题">
     
 
     <!--Open Graph Description-->
     
 
     <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Mind Abyss"/>
+    <meta property="og:site_name" content="Mind Abyss">
 
     <!--Type page-->
     
-        <meta property="og:type" content="article" />
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
     
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary">
     
 
     <!-- Title -->
@@ -65,7 +65,7 @@
     <![endif]-->
 
     <!-- Gallery -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
@@ -161,13 +161,13 @@
 
         <!-- Post Content -->
         <h1 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="SQL injection"></a>SQL injection</h1><h3 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>SQL注入：在参数处填写特殊字符以修改数据库查询命令功能，从而窃取或修改数据库信息。不安全的数据库调用方式容易引起此漏洞。</p>
-<p>例如，利用字符串拼接书写SQL语句极易引起SQL注入。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 一个十分初级的SQLi导致登录绕过的情况</span></div><div class="line">query_str = <span class="string">"SELECT id FROM users WHERE name = '%s' and password = '%s'"</span> % (username, password)</div></pre></td></tr></table></figure></p>
+<p>例如，利用字符串拼接书写SQL语句极易引起SQL注入。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个十分初级的SQLi导致登录绕过的情况</span></span><br><span class="line">query_str = <span class="string">"SELECT id FROM users WHERE name = '%s' and password = '%s'"</span> % (username, password)</span><br></pre></td></tr></table></figure></p>
 <p>当用户填写信息导致<code>username = &quot;&#39; or &#39;1&#39; = &#39;1&#39; /*&quot;</code>时，query_str 中实际的判断条件为：<code>name = &#39;&#39; or &#39;1&#39; = &#39;1&#39;</code>, 显然为真，导致登录绕过。</p>
-<p>SQLi 的危害不仅于此，发现此漏洞后可以通过添加分号后接各种语句达到遍历数据库甚至删库等操作。例如将前文中 <code>name</code> 填写为 `’;DROP TABLE user;`` 等。</p>
+<p>SQLi 的危害不仅于此，发现此漏洞后可以通过添加分号后接各种语句达到遍历数据库甚至删库等操作。例如将前文中 <code>name</code> 填写为 <code>&#39;;DROP TABLE user;`</code> 等。</p>
 <h3 id="规避方法"><a href="#规避方法" class="headerlink" title="规避方法"></a>规避方法</h3><p>规避此漏洞最好的办法就是：不要自行组装查询语句，善用各种成熟的ORM框架，并禁止采用类似eval的函数。只要规范的使用OEM框架，SQLi就不会影响到日常开发。这是知识成本最低且最安全的方式。</p>
 <h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><h3 id="漏洞简介-1"><a href="#漏洞简介-1" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>XSS即跨站脚本攻击，工作方式是在页面中嵌入恶意js代码，导致用户cookie等敏感信息泄露。可藉由表单填写、邮件、钓鱼网站等触发。实际工作时往往会携带用户cookie和网站域名请求一个攻击者预先布置好的服务器，导致攻击者直接窃取后台地址及登录权限，或邮箱登录权限等。</p>
-<p>例如，在表单填写中填入：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">''</span> <span class="attr">onerror</span>=<span class="string">'alert(document.cookie)'</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-<p>或者直接引入一个js文件，例如<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;lt;script src='http://any_site/xss.js' /&amp;gt;</div></pre></td></tr></table></figure></p>
+<p>例如，在表单填写中填入：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">''</span> <span class="attr">onerror</span>=<span class="string">'alert(document.cookie)'</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>或者直接引入一个js文件，例如<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">&amp;lt;</span>script src='http://any_site/xss.js' /<span class="symbol">&amp;gt;</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="规避方法-1"><a href="#规避方法-1" class="headerlink" title="规避方法"></a>规避方法</h3><p>当前各种前端框架均提供有基本的xss防御手段，如</p>
 <ul>
 <li>将各种标签转换为<code>&amp;lt;</code>实体字符</li>
@@ -176,9 +176,10 @@
 <p>但是具体使用时仍然需要测试，特别是某些二次展示或小型独立插件渲染的地方。比如将某段用户信息重新展示在弹出层，气泡框等地方的插件等，需要注意其是否有专门的参数控制渲染方式等。</p>
 <p>另，开发之外，在平时使用中，尽量选用一个好用的邮件客户端。</p>
 <h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h1><h3 id="漏洞简介-2"><a href="#漏洞简介-2" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>CSRF 即 跨站请求伪造，其工作方式是通过骗取用户加载伪造的请求，向网站请求、POST数据以达成攻击目的。</p>
-<p>例如，制作一个转账请求的链接诱导用户点击，甚至隐藏在xss中只需要加载即可完成攻击<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">'POST'</span>, <span class="string">'http://某银行/某转账操作/'</span>);</div><div class="line">xhr.send(<span class="string">'账户=我的账户&amp;金额=好多好多钱'</span>);</div></pre></td></tr></table></figure></p>
+<p>例如，在A网站制作一个转账请求的链接诱导用户点击从而请求B银行网站接口<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">'POST'</span>, <span class="string">'http://某银行/某转账操作/'</span>);</span><br><span class="line">xhr.send(<span class="string">'账户=我的账户&amp;金额=好多好多钱'</span>);</span><br></pre></td></tr></table></figure></p>
 <p>若此用户正保存此银行网站cookie且银行网站无法防御CSRF攻击，则用户转账请求被伪造成功。</p>
 <h3 id="规避方法-2"><a href="#规避方法-2" class="headerlink" title="规避方法"></a>规避方法</h3><p>CSRF通常危害各种有副作用的请求操作，例如提交表单等，主要在POST领域，所以通常也是防御POST行为。<br>这要求我们的POST操作不能仅仅信任cookie，还需要一些瞬时验证，比如在展示表单的时候在其中隐藏一次性token，在提交时验证并消耗此token。Django对此有标准的CSRF中间件。</p>
+<p>另， 开发之外，生活中尽量使用现代浏览器，例如Chrome等，这些浏览器有严格的CORS机制防止跨站请求出现。</p>
 <h1 id="目录穿越"><a href="#目录穿越" class="headerlink" title="目录穿越"></a>目录穿越</h1><h3 id="漏洞简介-3"><a href="#漏洞简介-3" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>此漏洞很少出现在现代框架中，其工作方式是在浏览器中尝试输入带有<code>../</code>的路径，去请求更上层的文件。例如尝试请求机器 <code>/etc</code> 目录下的某些关键配置等。</p>
 <h3 id="规避方法-3"><a href="#规避方法-3" class="headerlink" title="规避方法"></a>规避方法</h3><p>除了在一些非常古老的php框架中外，此漏洞一般不会出现，但是也不要自己主动制造，比如不要在代码中尝试将用户输入直接拼接到文件打开路径中。</p>
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>一句话： Web开发中永远不要相信用户输入。</p>
@@ -224,6 +225,10 @@
             
             <li>
                 <a class="footer-post" href="/2018/02/22/web_security/">Web开发中常见的安全问题</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/06/12/tree-with-index/">简单的带索引树构建</a>
             </li>
             
         </ul>
